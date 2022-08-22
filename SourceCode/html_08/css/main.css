@@ -1,0 +1,29 @@
+@import url(./base/button.css);
+@import url(./base/input.css);
+@import url(./base/combobox.css);
+@import url(./base/toast.css);
+body {
+    margin: 0;
+    font-family: MISA Fonts;
+    font-size: 13px;
+    height: 1000px;
+}
+
+@font-face {
+    font-family: MISA Fonts;
+    src: url(../assets/font/GoogleSans-Regular.otf);
+}
+
+@font-face {
+    font-family: MISA Fonts Bold;
+    src: url(../assets/font/GoogleSans-Bold.otf);
+}
+
+.row {
+    padding: 10px;
+}
+
+.label {
+    font-weight: 700;
+    margin-bottom: 8px;
+}

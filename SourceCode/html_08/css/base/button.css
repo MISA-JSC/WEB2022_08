@@ -1,0 +1,36 @@
+.button {
+    height: 40px;
+    min-width: 100px;
+    padding-left: 24px;
+    padding-right: 24px;
+    text-align: center;
+    background-color: #019160;
+    border-radius: 4px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+.button:hover,
+.button:focus {
+    background-color: #2fbe8e;
+}
+
+.button:active {
+    background-color: #01b075;
+}
+
+.button-icon {
+    padding-left: 40px;
+    padding-right: 16px;
+    background-repeat: no-repeat;
+    background-position: 16px center;
+    background-size: 16px 16px;
+}
+
+.icon-add {
+    background-image: url(../../assets/icon/add.png);
+}
+
+.icon-remove {}
