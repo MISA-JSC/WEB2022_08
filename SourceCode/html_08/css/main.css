@@ -2,11 +2,13 @@
 @import url(./base/input.css);
 @import url(./base/combobox.css);
 @import url(./base/toast.css);
+@import url(./layout/content.css);
+@import url(./layout/header.css);
+@import url(./layout/sibar.css);
 body {
     margin: 0;
     font-family: MISA Fonts;
     font-size: 13px;
-    height: 1000px;
 }
 
 @font-face {
@@ -26,4 +28,109 @@ body {
 .label {
     font-weight: 700;
     margin-bottom: 8px;
+}
+
+
+/* Cách truyền thống */
+
+.header {
+    float: left;
+    clear: right;
+    height: 60px;
+    background-color: aqua;
+    width: 100%;
+}
+
+.sibar {
+    float: left;
+    width: 225px;
+    height: calc(100vh - 60px);
+    background-color: black;
+    color: #fff;
+}
+
+.content {
+    float: right;
+    width: calc(100% - 225px);
+    background-color: blue;
+    height: calc(100vh - 60px);
+}
+
+
+/* Sử dụng flexbox: */
+
+
+/* 
+.container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+    justify-content: stretch;
+}
+
+.header {
+    width: 100%;
+    height: 60px;
+    background-color: aqua;
+}
+
+.sibar {
+    width: 225px;
+    background-color: black;
+    color: #fff;
+    height: calc(100vh - 60px);
+}
+
+.content {
+    flex: 1;
+    background-color: blue;
+    height: calc(100vh - 60px);
+} */
+
+
+/* Sử dụng grid */
+
+
+/* .container {
+    display: grid;
+    grid-template-columns: 225px auto;
+    grid-template-rows: 60px auto;
+    height: 100vh;
+}
+
+.header {
+    background-color: aqua;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.sibar {
+    background-color: blueviolet;
+}
+
+.content {
+    background-color: blue;
+} */
+
+
+/* @media (max-width:600px) {
+    .container {
+        grid-template-columns: 50px auto;
+    }
+}
+
+@media (max-width:600px) {
+    .sibar {
+        width: 50px;
+    }
+} */
+
+@media (max-width:600px) {
+    .sibar {
+        width: 50px;
+    }
+    .content {
+        width: calc(100% - 50px);
+    }
 }
