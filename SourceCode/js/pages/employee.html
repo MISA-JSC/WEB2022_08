@@ -62,20 +62,22 @@
                 </div>
                 <div class="page__table">
                     <div class="table__content">
-                        <table id="tbEmployeeList" class="table" border="0">
+                        <table id="tbEmployeeList" api="/" class="table" border="0">
                             <thead>
                                 <tr>
                                     <th class="text-align--left" title="Số thứ tự" style="width:50px">STT</th>
-                                    <th class="text-align--left" style="width:100px">Mã nhân viên</th>
-                                    <th class="text-align--left">Họ và tên</th>
-                                    <th class="text-align--left" style="width:50px">Giới tính</th>
-                                    <th class="text-align--center" style="width:100px">Ngày sinh</th>
-                                    <th class="text-align--left" style="width:100px">Điện thoại</th>
-                                    <th class="text-align--left" style="width:150px">Email</th>
-                                    <th class="text-align--left" style="width:200px">Vị trí</th>
-                                    <th class="text-align--left" style="width:200px">Phòng ban</th>
-                                    <th class="text-align--right" style="width:150px">Mức lương cơ bản</th>
-                                    <th class="text-align--left" style="width:150px">Tình trạng công việc</th>
+                                    <th class="text-align--left" prop-name="EmployeeCode" style="width:100px">Mã nhân viên</th>
+                                    <th class="text-align--left" prop-name="FullName">Họ và tên</th>
+                                    <th class="text-align--left" prop-name="Email" style="width:150px">Email</th>
+                                    <th class="text-align--left" prop-name="DepartmentCode" style="width:100px">Mã nhân viên</th>
+                                    <th class="text-align--left" prop-name="GenderName" style="width:50px">Giới tính</th>
+                                    <th class="text-align--left" prop-name="PositionName" style="width:200px">Vị trí</th>
+                                    <th class="text-align--right" format-money prop-name="Salary" style="width:150px">Mức lương cơ bản</th>
+                                    <th class="text-align--left" prop-name="PhoneNumber" style="width:100px">Điện thoại</th>
+                                    <th class="text-align--center" format-date prop-name="DateOfBirth" style="width:100px">Ngày sinh</th>
+                                    <th class="text-align--left" prop-name="PositionCode" style="width:150px">Mã vị trí</th>
+                                    <th class="text-align--left" prop-name="DepartmentName" style="width:200px">Phòng ban</th>
+                                    <th class="text-align--left" prop-name="WorkStatus" style="width:150px">Tình trạng công việc</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -154,7 +156,7 @@
 
     </div>
     <!-- Dialog chi tiết nhân viên -->
-    <div id="dlgEmployeeDetail" class="dialog">
+    <div id="dlgEmployeeDetail" class="dialog" hidden>
         <div class="dialog__content">
             <div id="btnClose2" class="dialog__button--close"></div>
             <div class="dialog__header title">Thông tin nhân viên</div>
@@ -162,17 +164,17 @@
                 <div class="row">
                     <div class="col">
                         <label>Mã nhân viên (<span class="input--required">*</span>)</label>
-                        <input id="txtEmployeeCode" nvmanh required name-property="Mã nhân viên" type="text" class="input">
+                        <input id="txtEmployeeCode" nvmanh required prop-name="EmployeeCode" type="text" class="input">
                     </div>
                     <div class="col">
                         <label>Họ và tên (<span class="input--required">*</span>)</label>
-                        <input id="txtFullName" nvmanh name-property="Họ và tên" required type="text" class="input">
+                        <input id="txtFullName" nvmanh prop-name="FullName" required type="text" class="input">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col col-50">
                         <label>Giới tính</label>
-                        <select name="" id="cbxGender">
+                        <select name="" id="cbxGender" prop-name="Gender">
                             <option value="0">Nam</option>
                             <option value="1">Nữ</option>
                             <option value="0">Khác</option>

@@ -37,6 +37,46 @@ var common = {
         } catch (error) {
             console.log(error);
         }
+    },
+
+    /**
+     * Hiển thị dialog cảnh báo
+     * @param {any} date Ngày tháng
+     * Athor: NVMANH (26/08/2022)
+     */
+    formatDate(date) {
+        try {
+            if (date) {
+                date = new Date(date)
+                    // Lấy ra ngày:
+                let day = date.getDate();
+                day = day < 10 ? `0${day}` : day;
+                let month = date.getMonth() + 1;
+                month = month < 10 ? `0${month}` : month;
+                let year = date.getFullYear();
+                return `${day}/${month}/${year}`;
+            } else {
+                return "";
+            }
+        } catch (error) {
+            console.log(error);
+            return "";
+        }
+    },
+
+    /**
+     * Định dạng tiền VND
+     * @param {Number} money Tiền
+     * Athor: NVMANH (26/08/2022)
+     */
+    formatMoneyVND(money) {
+        try {
+            money = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(money);
+            return money
+        } catch (error) {
+            console.log(error);
+            return "";
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 $(document).ready(function() {
     // Gán sự kiện cho các elements:
     initEvent();
+    loadData();
 })
 
 var laguageCode = "VI";
@@ -8,6 +9,87 @@ var laguageCode = "VI";
 // window.onload = function() {
 //     initEvent();
 // }
+
+function loadData() {
+    try {
+        // Gọi api thực hiện lấy dữ liệu:
+        fetch("https://cukcuk.manhnv.net/api/v1/Employees", { method: "GET" })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                // Xử lý dữ liệu:
+                var count = 1;
+                // Clear dữ liệu cũ: 
+                $("table#tbEmployeeList tbody").empty();
+                // Lấy thông tin các cột dữ liệu của bảng:
+                var ths = $("table#tbEmployeeList thead th");
+                for (const emp of res) {
+                    var trHTML = $(`<tr></tr>`);
+                    for (const th of ths) {
+                        // Lấy ra thông tin propName:
+                        const propName = $(th).attr("prop-name");
+                        // Lấy ra value:
+                        let value = emp[propName];
+                        const formatDate = th.hasAttribute("format-date");
+                        const formatMoney = th.hasAttribute("format-money");
+                        if (formatDate)
+                            value = common.formatDate(value);
+
+                        if (formatMoney)
+                            value = common.formatMoneyVND(value);
+
+                        var td = `<td>${value||""}</td>`
+                        trHTML.append(td);
+                    }
+                    trHTML.data("id", emp.EmployeeId);
+                    trHTML.data("entity", emp);
+                    $("table#tbEmployeeList tbody").append(trHTML);
+                    // Lấy các thông tin cần thiết từ object:
+                    // console.log(emp);
+                    // const employeeCode = emp.EmployeeCode;
+                    // const fullName = emp.FullName;
+                    // let dateOfBirth = emp["DateOfBirth"];
+                    // dateOfBirth = common.formatDate(dateOfBirth);
+                    // const genderName = emp["GenderName"];
+                    // const phoneNumber = emp["PhoneNumber"];
+                    // const email = emp["Email"];
+                    // const positionCode = emp["PositionCode"];
+                    // const positionName = emp["PositionName"];
+                    // const departmentName = emp["DepartmentName"];
+                    // let salary = Math.floor(Math.random() * 9) * 1000000; // Demo: lấy số ngẫu nhiên.
+                    // salary = common.formatMoneyVND(salary);
+                    // const workStatus = emp["WorkStatus"];
+                    // var trHTML = `<tr>
+                    //                 <td>${count}</td>
+                    //                 <td>${employeeCode||""}</td>
+                    //                 <td>${fullName||""}</td>
+                    //                 <td class="text-align--center">${genderName||""}</td>
+                    //                 <td>${phoneNumber||""}</td>
+                    //                 <td>${dateOfBirth||""}</td>
+                    //                 <td>${email||""}</td>
+                    //                 <td>${positionCode||""}</td>
+                    //                 <td>${positionName||""}</td>
+                    //                 <td>${departmentName||""}</td>
+                    //                 <td class="text-align--right">${salary||""}</td>
+                    //                 <td>${workStatus||""}</td>
+                    //             </tr>`;
+                    //$("table#tbEmployeeList tbody").append(trHTML);
+                    count++;
+                }
+                // 1. Định dạng dữ liệu ngày sinh
+                // 2. Định dạng tiền:
+                // ....
+                // Build 
+            })
+            .catch(res => {
+
+            })
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 /*******************************
  * Tạo các Event cho các elements
@@ -63,7 +145,21 @@ function initEvent() {
             $("#dlgEmployeeDetail").hide();
         })
 
-        $('tr').dblclick(function() {
+        $(document).on('dblclick', '#tbEmployeeList tr', function() {
+            debugger
+            // Lấy id của bản ghi:
+            const id = $(this).data('id');
+            fetch(`https://cukcuk.manhnv.net/api/v1/Employees/${id}`)
+                .then(res => res.json())
+                .then(res => {
+                    // binding data:
+                    let inputs = $("#dlgEmployeeDetail input,#dlgEmployeeDetail select,#dlgEmployeeDetail textarea");
+                    for (const input of inputs) {
+                        const propName = $(input).attr("prop-name");
+                        let value = res[propName];
+                        $(input).val(value);
+                    }
+                })
             $("#dlgEmployeeDetail").show();
         })
 
@@ -127,6 +223,32 @@ function saveData() {
             common.showErrorDialog(msgErrors);
             // showErrorDialog(msgErrors);
         }
+        // Gọi api thực hiện cất dữ liệu:
+        // 1. build object:
+        let inputs = $("#dlgEmployeeDetail input,#dlgEmployeeDetail select,#dlgEmployeeDetail textarea");
+        var employee = {};
+        for (const input of inputs) {
+            const propName = $(input).attr("prop-name");
+            let value = $(input).val();
+            $(input).val(value);
+            if (value)
+                employee[propName] = value;
+        }
+        console.log(employee);
+        $.ajax({
+            type: "POST",
+            url: "https://cukcuk.manhnv.net/api/v1/Employees",
+            data: JSON.stringify(employee),
+            dataType: "json",
+            contentType: "application/json",
+            success: function(response) {
+                // Hiển thị toast:
+            },
+            error: function() {
+
+            }
+
+        });
 
     } catch (error) {
         console.log(error);
