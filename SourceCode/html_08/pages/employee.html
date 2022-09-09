@@ -7,13 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../lib/combobox/css/combobox.css">
+    <script src="../lib/combobox/js/jquery-3.6.0.min.js"></script>
+    <script src="../lib/combobox/js/combobox.js"></script>
 </head>
 
 <body>
     <div class="container">
         <div class="header">header</div>
         <div class="sibar">sibar</div>
-        <div class="content">content</div>
+        <div class="content">
+            <mcombobox id="cbxGender " api="https://cukcuk.manhnv.net/api/v1/CustomerGroups " text="CustomerGroupName " value="CustomerGroupId ">
+            </mcombobox>
+        </div>
     </div>
 
 </body>
